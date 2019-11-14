@@ -2,7 +2,7 @@
 
 
 # all commands executed from 'root' => 'sudo su' before use
-# wget -q https://raw.githubusercontent.com/Stikus/Scripts/master/ubuntu_init.sh AKA tuny.cc/ubuntu.sh
+# wget -q https://raw.githubusercontent.com/Stikus/Scripts/master/ubuntu_init.sh AKA http://tiny.cc/stik_ubuntu
 
 MAINUSER="bio"
 
