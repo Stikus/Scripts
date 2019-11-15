@@ -2,13 +2,13 @@
 
 
 # all commands executed from 'root' => 'sudo su' before use
-# wget -q https://raw.githubusercontent.com/Stikus/Scripts/master/ubuntu_init.sh AKA http://tiny.cc/stik_centos
+# link to this file: https://raw.githubusercontent.com/Stikus/Scripts/master/centos_init.sh OR http://tiny.cc/stik_centos
+# curl -sSL tiny.cc/stik_centos -o centos.sh
 
 MAINUSER="bio"
 
 yum -y install epel-release && yum -y update && yum -y install \
-    build-essential \
-    pkg-config \
+    pkgconfig \
     cmake \
     curl \
     wget \
@@ -20,15 +20,18 @@ yum -y install epel-release && yum -y update && yum -y install \
     zip \
     unzip \
     pigz \
-    xz-utils \
     mc \
     parallel \
     htop \
     iotop \
     git \
-    ssh \
+    openssh-server \
+    openssh-clients \
     qemu-guest-agent \
-    tree
+    tree \
+    kernel-devel \
+    kernel-headers \
+    && yum -y groupinstall 'Development Tools'
 
 # export TZ="Europe/Moscow"
 # rm /etc/localtime \
