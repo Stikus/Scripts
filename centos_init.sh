@@ -21,6 +21,7 @@ yum -y install epel-release && yum -y update && yum -y install \
     unzip \
     pigz \
     mc \
+    nano \
     parallel \
     htop \
     iotop \
