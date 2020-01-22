@@ -98,8 +98,8 @@ pip3 install --upgrade psutil
 apt-get --yes --no-install-recommends install openjdk-8-jdk
 export _JAVA_OPTIONS="-Djava.io.tmpdir=$TMPDIR"
 
-# cwltool 1.0.20190915164430
-pip3 install 'cwltool==1.0.20190915164430'
+# cwltool 1.0.20191225192155
+pip3 install 'cwltool==1.0.20191225192155'
 
 # shellcheck 0.7.0
 wget -q "https://shellcheck.storage.googleapis.com/shellcheck-v0.7.0.linux.x86_64.tar.xz" -O "shellcheck-v0.7.0.linux.x86_64.tar.xz" \
