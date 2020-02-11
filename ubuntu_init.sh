@@ -120,6 +120,8 @@ mkdir -p "$SOFT"
 
 # Add GKS vm01 pub RSA-key
 sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
+# Add GKS Server pub RSA-key
+sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
 
 # Final updates
 apt-get update && apt-get -y dist-upgrade
