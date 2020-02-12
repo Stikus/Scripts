@@ -56,7 +56,8 @@ apt-get update && apt-get --yes upgrade && apt-get --yes --no-install-recommends
     xfsprogs \
     nfs-common \
     tree \
-    ntp
+    ntp \
+    tmux
 
 systemctl start ntpd
 systemctl enable ntpd
@@ -122,6 +123,8 @@ mkdir -p "$SOFT"
 sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
 # Add GKS Server pub RSA-key
 sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
+# Add GKS Server pub RSA-key
+sudo -Hu "$MAINUSER" bash -c 'wget -q "ftp://bioftp.cspmz.ru/certs/keys/.tmux.conf" -O "$HOME/.tmux.conf"'
 
 # Final updates
 apt-get update && apt-get -y dist-upgrade
