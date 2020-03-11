@@ -6,14 +6,14 @@
 
 MAINUSER="bio"
 
-# # swapfile settings
-# swapoff /swapfile
-# rm /swapfile
-# touch /swapfile
-# chmod 600 /swapfile
-# dd if=/dev/zero of=/swapfile bs=1M count=8192 oflag=append conv=notrunc
-# mkswap /swapfile
-# swapon /swapfile
+# swapfile settings
+swapoff /swapfile
+rm /swapfile
+touch /swapfile
+chmod 600 /swapfile
+dd if=/dev/zero of=/swapfile bs=1M count=8192 oflag=append conv=notrunc
+mkswap /swapfile
+swapon /swapfile
 
 export DEBIAN_FRONTEND="noninteractive"
 
@@ -67,15 +67,15 @@ rm /etc/localtime \
     && echo "$TZ" > /etc/timezone \
     && dpkg-reconfigure tzdata
 
-# # docker
-# apt-get --yes --no-install-recommends install \
-#     apt-transport-https \
-#     ca-certificates \
-#     gpg-agent \
-#     && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
-#     && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
-#     && apt-get update \
-#     && apt-get --yes --no-install-recommends install docker-ce
+# docker
+apt-get --yes --no-install-recommends install \
+    apt-transport-https \
+    ca-certificates \
+    gpg-agent \
+    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
+    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+    && apt-get update \
+    && apt-get --yes --no-install-recommends install docker-ce
 
 # Docker sertificate
 wget -q "ftp://bioftp.cspmz.ru/certs/cspmzCA.pem" -O "/etc/ssl/certs/cspmzCA.pem" \
