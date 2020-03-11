@@ -6,14 +6,14 @@
 
 MAINUSER="bio"
 
-# swapfile settings
-swapoff /swapfile
-rm /swapfile
-touch /swapfile
-chmod 600 /swapfile
-dd if=/dev/zero of=/swapfile bs=1M count=8192 oflag=append conv=notrunc
-mkswap /swapfile
-swapon /swapfile
+# # swapfile settings
+# swapoff /swapfile
+# rm /swapfile
+# touch /swapfile
+# chmod 600 /swapfile
+# dd if=/dev/zero of=/swapfile bs=1M count=8192 oflag=append conv=notrunc
+# mkswap /swapfile
+# swapon /swapfile
 
 export DEBIAN_FRONTEND="noninteractive"
 
@@ -67,15 +67,15 @@ rm /etc/localtime \
     && echo "$TZ" > /etc/timezone \
     && dpkg-reconfigure tzdata
 
-# docker
-apt-get --yes --no-install-recommends install \
-    apt-transport-https \
-    ca-certificates \
-    gpg-agent \
-    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
-    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
-    && apt-get update \
-    && apt-get --yes --no-install-recommends install docker-ce
+# # docker
+# apt-get --yes --no-install-recommends install \
+#     apt-transport-https \
+#     ca-certificates \
+#     gpg-agent \
+#     && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
+#     && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+#     && apt-get update \
+#     && apt-get --yes --no-install-recommends install docker-ce
 
 # Docker sertificate
 wget -q "ftp://bioftp.cspmz.ru/certs/cspmzCA.pem" -O "/etc/ssl/certs/cspmzCA.pem" \
@@ -99,8 +99,8 @@ pip3 install --upgrade psutil
 apt-get --yes --no-install-recommends install openjdk-8-jdk
 export _JAVA_OPTIONS="-Djava.io.tmpdir=$TMPDIR"
 
-# cwltool 1.0.20191225192155
-pip3 install 'cwltool==1.0.20191225192155'
+# cwltool 2.0.20200303141624
+pip3 install 'cwltool==2.0.20200303141624'
 
 # shellcheck 0.7.0
 wget -q "https://shellcheck.storage.googleapis.com/shellcheck-v0.7.0.linux.x86_64.tar.xz" -O "shellcheck-v0.7.0.linux.x86_64.tar.xz" \
