@@ -21,7 +21,8 @@ export DEBIAN_FRONTEND="noninteractive"
 apt-get update && apt-get --yes upgrade && apt-get --yes --no-install-recommends install \
     build-essential \
     pkg-config \
-    cmake \
+    python3-dev \
+    python3-testresources \
     software-properties-common \
     ncurses-dev \
     curl \
@@ -56,6 +57,7 @@ apt-get update && apt-get --yes upgrade && apt-get --yes --no-install-recommends
     cifs-utils \
     xfsprogs \
     nfs-common \
+    nfs-kernel-server \
     tree \
     ntp \
     tmux
@@ -86,13 +88,17 @@ wget -q "ftp://bioftp.cspmz.ru/certs/cspmzCA.pem" -O "/etc/ssl/certs/cspmzCA.pem
 # Add user 'MAINUSER' to 'docker' group
 usermod -a -G docker "$MAINUSER"
 
-# python3 & pip3
-apt-get --yes --no-install-recommends install python3-dev
+# pip3
 curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
     && python3 get-pip.py --force-reinstall \
     && rm get-pip.py
 pip3 install --upgrade psutil
 
+
+# gcc
+apt-get -y --no-install-recommends install \
+    g++-7 \
+    gcc-7
 
 # java8
 apt-get --yes --no-install-recommends install openjdk-8-jdk
@@ -100,8 +106,8 @@ export _JAVA_OPTIONS="-Djava.io.tmpdir=$TMPDIR" \
     JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 echo 'export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"' >> "$BASHRC"
 
-# cwltool 2.0.20200303141624
-pip3 install 'cwltool==2.0.20200303141624'
+# cwltool 3.0.20200324120055
+pip3 install 'cwltool==3.0.20200324120055'
 
 # shellcheck 0.7.1
 wget -q "https://shellcheck.storage.googleapis.com/shellcheck-v0.7.1.linux.x86_64.tar.xz" -O "shellcheck-v0.7.1.linux.x86_64.tar.xz" \
@@ -115,14 +121,14 @@ wget -q "https://shellcheck.storage.googleapis.com/shellcheck-v0.7.1.linux.x86_6
 wget -q "https://raw.githubusercontent.com/serge2016/memUsage/6c2474a6879eecc544dfd5a68e2ffc2d98ead014/memUsage.py" -O - | tr -d '\r' > "/usr/local/bin/memUsage.py" \
     && chmod +x "/usr/local/bin/memUsage.py"
 export MEMUSAGE="/usr/local/bin/memUsage.py"
-
+echo 'export MEMUSAGE="/usr/local/bin/memUsage.py"' >> "$BASHRC"
 
 export SOFT="/home/$MAINUSER/soft"
 echo 'export SOFT="/home/'$MAINUSER'/soft"' >> "$BASHRC"
 mkdir -p "$SOFT"
 
 # cmake 3.17.2
-cd $SOFT \
+cd "$SOFT" \
     && wget -q "https://cmake.org/files/v3.17/cmake-3.17.2-Linux-x86_64.sh" -O "$SOFT/cmake-3.17.2-Linux-x86_64.sh" \
     && sh "$SOFT/cmake-3.17.2-Linux-x86_64.sh" --prefix="$SOFT" --include-subdir --skip-license \
     && rm "$SOFT/cmake-3.17.2-Linux-x86_64.sh"
