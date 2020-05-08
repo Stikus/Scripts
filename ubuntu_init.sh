@@ -5,6 +5,7 @@
 # wget -q https://raw.githubusercontent.com/Stikus/Scripts/master/ubuntu_init.sh AKA http://tiny.cc/stik_ubuntu
 
 MAINUSER="bio"
+BASHRC="/home/$MAINUSER/.bashrc"
 
 # swapfile settings
 swapoff /swapfile
@@ -85,29 +86,29 @@ wget -q "ftp://bioftp.cspmz.ru/certs/cspmzCA.pem" -O "/etc/ssl/certs/cspmzCA.pem
 # Add user 'MAINUSER' to 'docker' group
 usermod -a -G docker "$MAINUSER"
 
-# python3.6 & pip3
-apt-get --yes --no-install-recommends install python3.6 python3.6-dev python3-pip python3-testresources \
-    && rm /usr/bin/python3 \
-    && ln -s /usr/bin/python3.6 /usr/bin/python3 \
-    && ln -s /usr/bin/python3.6 /usr/bin/python
-pip3 install --upgrade pip
-hash -d pip3
-pip3 install --upgrade wheel setuptools
+# python3 & pip3
+apt-get --yes --no-install-recommends install python3-dev
+curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
+    && python3 get-pip.py --force-reinstall \
+    && rm get-pip.py
 pip3 install --upgrade psutil
+
 
 # java8
 apt-get --yes --no-install-recommends install openjdk-8-jdk
-export _JAVA_OPTIONS="-Djava.io.tmpdir=$TMPDIR"
+export _JAVA_OPTIONS="-Djava.io.tmpdir=$TMPDIR" \
+    JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+echo 'export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"' >> "$BASHRC"
 
 # cwltool 2.0.20200303141624
 pip3 install 'cwltool==2.0.20200303141624'
 
-# shellcheck 0.7.0
-wget -q "https://shellcheck.storage.googleapis.com/shellcheck-v0.7.0.linux.x86_64.tar.xz" -O "shellcheck-v0.7.0.linux.x86_64.tar.xz" \
-    && tar -xJf "shellcheck-v0.7.0.linux.x86_64.tar.xz" \
-    && mv shellcheck-v0.7.0/shellcheck /usr/local/bin \
-    && rm "shellcheck-v0.7.0.linux.x86_64.tar.xz" \
-    && rm -r shellcheck-v0.7.0/
+# shellcheck 0.7.1
+wget -q "https://shellcheck.storage.googleapis.com/shellcheck-v0.7.1.linux.x86_64.tar.xz" -O "shellcheck-v0.7.1.linux.x86_64.tar.xz" \
+    && tar -xJf "shellcheck-v0.7.1.linux.x86_64.tar.xz" \
+    && mv shellcheck-v0.7.1/shellcheck /usr/local/bin \
+    && rm "shellcheck-v0.7.1.linux.x86_64.tar.xz" \
+    && rm -r shellcheck-v0.7.1/
 
 # memUsage #6c2474a [v0.2.0 02.09.2019]
 # psutil >= 2.2.1 (Tested with 5.6.1 - ok; 1.2.1 - err) - additional python package required for memUsage.
@@ -116,11 +117,18 @@ wget -q "https://raw.githubusercontent.com/serge2016/memUsage/6c2474a6879eecc544
 export MEMUSAGE="/usr/local/bin/memUsage.py"
 
 
-export SOFT="/soft"
+export SOFT="/home/$MAINUSER/soft"
+echo 'export SOFT="/home/'$MAINUSER'/soft"' >> "$BASHRC"
 mkdir -p "$SOFT"
 
-# Add GKS vm01 pub RSA-key
-sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
+# cmake 3.17.2
+cd $SOFT \
+    && wget -q "https://cmake.org/files/v3.17/cmake-3.17.2-Linux-x86_64.sh" -O "$SOFT/cmake-3.17.2-Linux-x86_64.sh" \
+    && sh "$SOFT/cmake-3.17.2-Linux-x86_64.sh" --prefix="$SOFT" --include-subdir --skip-license \
+    && rm "$SOFT/cmake-3.17.2-Linux-x86_64.sh"
+export PATH="$SOFT/cmake-3.17.2-Linux-x86_64/bin:$PATH"
+echo 'export PATH="$SOFT/cmake-3.17.2-Linux-x86_64/bin:$PATH"' >> "$BASHRC"
+
 # Add GKS Server pub RSA-key
 sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
 # Add tmux config with mouse enabled
