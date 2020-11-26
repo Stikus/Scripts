@@ -29,28 +29,25 @@ echo 'LANG="en_US.UTF-8"'> /etc/default/locale && \
 dpkg-reconfigure --frontend=noninteractive locales && \
 update-locale LANG=en_US.UTF-8
 
-apt-get update && apt-get --yes upgrade && apt-get --yes dist-upgrade && apt-get --yes install \
+apt-get update && apt-get --yes dist-upgrade && apt-get --yes upgrade && apt-get --yes install \
     mc \
     htop \
     nfs-common \
     ntp \
     tmux
 
-systemctl start ntpd
-systemctl enable ntpd
-
 lvremove -y /dev/pve/data
 lvextend --resizefs -l +100%FREE pve/root
 
-# Mdadm part
-apt-get install -y mdadm
-mdadm --zero-superblock --force /dev/nvme{0..3}n1
-wipefs --all --force /dev/nvme{0..3}n1
-mdadm --create --verbose /dev/md0 -l 10 -n 4 /dev/nvme{0..3}n1
-mkdir /etc/mdadm
-echo "DEVICE partitions" > /etc/mdadm/mdadm.conf
-mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
-mkfs.ext4 /dev/md0
-mkdir /mnt/data
-echo "/dev/md0        /mnt/data    ext4    defaults    0 0" >> /etc/fstab
-mount -a
+# # Mdadm part
+# apt-get install -y mdadm
+# mdadm --zero-superblock --force /dev/nvme{0..3}n1
+# wipefs --all --force /dev/nvme{0..3}n1
+# mdadm --create --verbose /dev/md0 -l 10 -n 4 /dev/nvme{0..3}n1
+# mkdir -p /etc/mdadm
+# echo "DEVICE partitions" > /etc/mdadm/mdadm.conf
+# mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
+# mkfs.ext4 /dev/md0
+# mkdir /mnt/data
+# echo "/dev/md0        /mnt/data    ext4    defaults    0 0" >> /etc/fstab
+# mount -a
