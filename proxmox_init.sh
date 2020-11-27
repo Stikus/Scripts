@@ -16,7 +16,8 @@ wget -q "ftp://bioftp.cspmz.ru/certs/keys/.tmux.conf" -O "$HOME/.tmux.conf"
 echo -e "search pak-cspmz.ru cspmz.ru\nnameserver 10.100.143.21\nnameserver 10.100.143.22" > /etc/resolv.conf
 
 # Fix licence warning
-sed -i.bak "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js && systemctl restart pveproxy.service
+# sed -i.bak "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js && systemctl restart pveproxy.service
+sed -i.bak -z "s/res === null || res === undefined || \!res || res\n\t\t\t.data.status.toLowerCase() \!== 'active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js && systemctl restart pveproxy.service
 
 # Fix updates
 sed -i -E 's|^(.*)$|#\1|' /etc/apt/sources.list.d/pve-enterprise.list
