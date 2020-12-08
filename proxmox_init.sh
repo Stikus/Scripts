@@ -52,3 +52,34 @@ lvextend --resizefs -l +100%FREE pve/root
 # mkdir /mnt/data
 # echo "/dev/md0        /mnt/data    ext4    defaults    0 0" >> /etc/fstab
 # mount -a
+
+# Fusion inventory part: https://gitlab.cspmz.ru/volk/samba-AD-ansible/-/tree/master/roles/fusioninventory-agent
+apt-get update && apt-get --yes install \
+    dmidecode \
+    hwdata \
+    hdparm \
+    libuniversal-require-perl \
+    libwww-perl \
+    libparse-edid-perl \
+    libproc-daemon-perl \
+    libfile-which-perl \
+    libhttp-daemon-perl \
+    libxml-treepp-perl \
+    libyaml-perl \
+    libnet-cups-perl \
+    libnet-ip-perl \
+    libdigest-sha-perl \
+    libjson-pp-perl \
+    libsocket-getaddrinfo-perl \
+    libtext-template-perl \
+    lsb-base \
+    xz-utils
+
+wget -q http://debian.fusioninventory.org/downloads/fusioninventory-agent_2.5-3_all.deb && \
+dpkg -i fusioninventory-agent_2.5-3_all.deb && \
+rm fusioninventory-agent_2.5-3_all.deb && \
+sed -i 's|#server = http://server.domain.com/glpi/plugins/fusioninventory/|server = https://inv.pak-cspmz.ru/inv/plugins/fusioninventory|' /etc/fusioninventory/agent.cfg && \
+sed -i 's|no-ssl-check = 0|no-ssl-check = 1|' /etc/fusioninventory/agent.cfg && \
+sed -i 's|#logfile = /var/log/fusioninventory.log|logfile = /var/log/fusioninventory.log|' /etc/fusioninventory/agent.cfg && \
+sed -i 's|debug = 0|debug = 1|' /etc/fusioninventory/agent.cfg && \
+systemctl restart fusioninventory-agent
