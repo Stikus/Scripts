@@ -106,8 +106,8 @@ export _JAVA_OPTIONS="-Djava.io.tmpdir=$TMPDIR" \
     JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 echo 'export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"' >> "$BASHRC"
 
-# cwltool 3.0.20200324120055
-pip3 install 'cwltool==3.0.20200324120055'
+# cwltool 3.0.20201203173111
+pip3 install 'cwltool==3.0.20201203173111'
 
 # shellcheck 0.7.1
 wget -q "https://shellcheck.storage.googleapis.com/shellcheck-v0.7.1.linux.x86_64.tar.xz" -O "shellcheck-v0.7.1.linux.x86_64.tar.xz" \
@@ -127,13 +127,13 @@ export SOFT="/home/$MAINUSER/soft"
 echo 'export SOFT="/home/'$MAINUSER'/soft"' >> "$BASHRC"
 mkdir -p "$SOFT"
 
-# cmake 3.17.2
+# cmake 3.19.2
 cd "$SOFT" \
-    && wget -q "https://cmake.org/files/v3.17/cmake-3.17.2-Linux-x86_64.sh" -O "$SOFT/cmake-3.17.2-Linux-x86_64.sh" \
-    && sh "$SOFT/cmake-3.17.2-Linux-x86_64.sh" --prefix="$SOFT" --include-subdir --skip-license \
-    && rm "$SOFT/cmake-3.17.2-Linux-x86_64.sh"
-export PATH="$SOFT/cmake-3.17.2-Linux-x86_64/bin:$PATH"
-echo 'export PATH="$SOFT/cmake-3.17.2-Linux-x86_64/bin:$PATH"' >> "$BASHRC"
+    && wget -q "https://cmake.org/files/v3.17/cmake-3.19.2-Linux-x86_64.sh" -O "$SOFT/cmake-3.19.2-Linux-x86_64.sh" \
+    && sh "$SOFT/cmake-3.19.2-Linux-x86_64.sh" --prefix="$SOFT" --include-subdir --skip-license \
+    && rm "$SOFT/cmake-3.19.2-Linux-x86_64.sh"
+export PATH="$SOFT/cmake-3.19.2-Linux-x86_64/bin:$PATH"
+echo 'export PATH="$SOFT/cmake-3.19.2-Linux-x86_64/bin:$PATH"' >> "$BASHRC"
 
 # Add GKS Server pub RSA-key
 sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
