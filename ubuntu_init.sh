@@ -60,7 +60,8 @@ apt-get update && apt-get --yes upgrade && apt-get --yes --no-install-recommends
     nfs-kernel-server \
     tree \
     ntp \
-    tmux
+    tmux \
+    ceph-common
 
 systemctl start ntpd
 systemctl enable ntpd
