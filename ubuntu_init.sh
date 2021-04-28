@@ -107,15 +107,15 @@ export _JAVA_OPTIONS="-Djava.io.tmpdir=$TMPDIR" \
     JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 echo 'export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"' >> "$BASHRC"
 
-# cwltool 3.0.20201203173111
-pip3 install 'cwltool==3.0.20201203173111'
+# cwltool 3.1.20210426140515
+pip3 install 'cwltool==3.1.20210426140515'
 
-# shellcheck 0.7.1
-wget -q "https://shellcheck.storage.googleapis.com/shellcheck-v0.7.1.linux.x86_64.tar.xz" -O "shellcheck-v0.7.1.linux.x86_64.tar.xz" \
-    && tar -xJf "shellcheck-v0.7.1.linux.x86_64.tar.xz" \
-    && mv shellcheck-v0.7.1/shellcheck /usr/local/bin \
-    && rm "shellcheck-v0.7.1.linux.x86_64.tar.xz" \
-    && rm -r shellcheck-v0.7.1/
+# shellcheck 0.7.2
+wget -q "https://github.com/koalaman/shellcheck/releases/download/v0.7.2/shellcheck-v0.7.2.linux.x86_64.tar.xz" -O "shellcheck-v0.7.2.linux.x86_64.tar.xz" \
+    && tar -xJf "shellcheck-v0.7.2.linux.x86_64.tar.xz" \
+    && mv shellcheck-v0.7.2/shellcheck /usr/local/bin \
+    && rm "shellcheck-v0.7.2.linux.x86_64.tar.xz" \
+    && rm -r shellcheck-v0.7.2/
 
 # memUsage #6c2474a [v0.2.0 02.09.2019]
 # psutil >= 2.2.1 (Tested with 5.6.1 - ok; 1.2.1 - err) - additional python package required for memUsage.
@@ -128,13 +128,13 @@ export SOFT="/home/$MAINUSER/soft"
 echo 'export SOFT="/home/'$MAINUSER'/soft"' >> "$BASHRC"
 mkdir -p "$SOFT"
 
-# cmake 3.19.2
+# cmake 3.20.1
 cd "$SOFT" \
-    && wget -q "https://cmake.org/files/v3.17/cmake-3.19.2-Linux-x86_64.sh" -O "$SOFT/cmake-3.19.2-Linux-x86_64.sh" \
-    && sh "$SOFT/cmake-3.19.2-Linux-x86_64.sh" --prefix="$SOFT" --include-subdir --skip-license \
-    && rm "$SOFT/cmake-3.19.2-Linux-x86_64.sh"
-export PATH="$SOFT/cmake-3.19.2-Linux-x86_64/bin:$PATH"
-echo 'export PATH="$SOFT/cmake-3.19.2-Linux-x86_64/bin:$PATH"' >> "$BASHRC"
+    && wget -q "https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-linux-x86_64.sh" -O "$SOFT/cmake-3.20.1-linux-x86_64.sh" \
+    && sh "$SOFT/cmake-3.20.1-linux-x86_64.sh" --prefix="$SOFT" --include-subdir --skip-license \
+    && rm "$SOFT/cmake-3.20.1-linux-x86_64.sh"
+export PATH="$SOFT/cmake-3.20.1-linux-x86_64/bin:$PATH"
+echo 'export PATH="$SOFT/cmake-3.20.1-linux-x86_64/bin:$PATH"' >> "$BASHRC"
 
 # Add GKS Server pub RSA-key
 sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
@@ -142,4 +142,4 @@ sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.csp
 sudo -Hu "$MAINUSER" bash -c 'wget -q "ftp://bioftp.cspmz.ru/certs/keys/.tmux.conf" -O "$HOME/.tmux.conf"'
 
 # Final updates
-apt-get update && apt-get -y dist-upgrade
+# apt-get update && apt-get -y dist-upgrade
