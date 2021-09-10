@@ -71,7 +71,7 @@ rm /etc/localtime \
     && echo "$TZ" > /etc/timezone \
     && dpkg-reconfigure tzdata
 
-# docker
+# docker - https://docs.docker.com/engine/install/ubuntu/
 apt-get --yes --no-install-recommends install \
     apt-transport-https \
     ca-certificates \
@@ -93,6 +93,7 @@ usermod -a -G docker "$MAINUSER"
 curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
     && python3 get-pip.py --force-reinstall \
     && rm get-pip.py
+pip3 install 'setuptools<58'
 pip3 install --upgrade psutil
 
 
