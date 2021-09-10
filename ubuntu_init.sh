@@ -107,8 +107,8 @@ export _JAVA_OPTIONS="-Djava.io.tmpdir=$TMPDIR" \
     JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 echo 'export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"' >> "$BASHRC"
 
-# cwltool 3.1.20210426140515
-pip3 install 'cwltool==3.1.20210426140515'
+# cwltool 3.1.20210816212154
+pip3 install 'cwltool==3.1.20210816212154'
 
 # shellcheck 0.7.2
 wget -q "https://github.com/koalaman/shellcheck/releases/download/v0.7.2/shellcheck-v0.7.2.linux.x86_64.tar.xz" -O "shellcheck-v0.7.2.linux.x86_64.tar.xz" \
