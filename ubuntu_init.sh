@@ -93,7 +93,7 @@ usermod -a -G docker "$MAINUSER"
 curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
     && python3 get-pip.py --force-reinstall \
     && rm get-pip.py
-pip3 install 'setuptools<58'
+# pip3 install 'setuptools<58'
 pip3 install --upgrade psutil
 
 
@@ -108,8 +108,8 @@ export _JAVA_OPTIONS="-Djava.io.tmpdir=$TMPDIR" \
     JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 echo 'export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"' >> "$BASHRC"
 
-# cwltool 3.1.20210816212154
-pip3 install 'cwltool==3.1.20210816212154'
+# cwltool
+pip3 install 'cwltool==3.1.20211020155521'
 
 # shellcheck 0.7.2
 wget -q "https://github.com/koalaman/shellcheck/releases/download/v0.7.2/shellcheck-v0.7.2.linux.x86_64.tar.xz" -O "shellcheck-v0.7.2.linux.x86_64.tar.xz" \
@@ -129,13 +129,13 @@ export SOFT="/home/$MAINUSER/soft"
 echo 'export SOFT="/home/'$MAINUSER'/soft"' >> "$BASHRC"
 mkdir -p "$SOFT"
 
-# cmake 3.20.1
+# cmake 3.21.4
 cd "$SOFT" \
-    && wget -q "https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-linux-x86_64.sh" -O "$SOFT/cmake-3.20.1-linux-x86_64.sh" \
-    && sh "$SOFT/cmake-3.20.1-linux-x86_64.sh" --prefix="$SOFT" --include-subdir --skip-license \
-    && rm "$SOFT/cmake-3.20.1-linux-x86_64.sh"
-export PATH="$SOFT/cmake-3.20.1-linux-x86_64/bin:$PATH"
-echo 'export PATH="$SOFT/cmake-3.20.1-linux-x86_64/bin:$PATH"' >> "$BASHRC"
+    && wget -q "https://github.com/Kitware/CMake/releases/download/v3.21.4/cmake-3.21.4-linux-x86_64.sh" -O "$SOFT/cmake-3.21.4-linux-x86_64.sh" \
+    && sh "$SOFT/cmake-3.21.4-linux-x86_64.sh" --prefix="$SOFT" --include-subdir --skip-license \
+    && rm "$SOFT/cmake-3.21.4-linux-x86_64.sh"
+export PATH="$SOFT/cmake-3.21.4-linux-x86_64/bin:$PATH"
+echo 'export PATH="$SOFT/cmake-3.21.4-linux-x86_64/bin:$PATH"' >> "$BASHRC"
 
 # Add GKS Server pub RSA-key
 sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
