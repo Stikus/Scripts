@@ -82,7 +82,7 @@ apt-get --yes --no-install-recommends install \
     && apt-get --yes --no-install-recommends install docker-ce
 
 # Docker sertificate
-wget -q "ftp://bioftp.cspmz.ru/certs/cspmz-hq-ca-vs-02-ca.crt" -O "/etc/ssl/certs/cspmz-hq-ca-vs-02-ca.crt" \
+wget -q -nd -r "ftp://bioftp.cspmz.ru/certs/*crt" -P /usr/local/share/ca-certificates/csp-certs \
     && update-ca-certificates \
     && systemctl restart docker.service
 
