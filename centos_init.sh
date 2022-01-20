@@ -35,7 +35,7 @@ yum -y install epel-release && yum -y update && yum -y install \
     && yum -y groupinstall 'Development Tools'
 
 # Add GKS vm01 pub RSA-key for root
-mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"
+mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspfmba.ru/certs/keys/GKS_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"
 
 # Add GKS vm01 pub RSA-key for MAINUSER
-sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
+sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspfmba.ru/certs/keys/GKS_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'

@@ -82,7 +82,7 @@ apt-get --yes --no-install-recommends install \
     && apt-get --yes --no-install-recommends install docker-ce
 
 # Docker sertificate
-wget -q -nd -r "ftp://bioftp.cspmz.ru/certs/*crt" -P /usr/local/share/ca-certificates/csp-certs \
+wget -q -nd -r "ftp://bioftp.cspfmba.ru/certs/*crt" -P /usr/local/share/ca-certificates/csp-certs \
     && update-ca-certificates \
     && systemctl restart docker.service
 
@@ -138,9 +138,9 @@ export PATH="$SOFT/cmake-3.21.4-linux-x86_64/bin:$PATH"
 echo 'export PATH="$SOFT/cmake-3.21.4-linux-x86_64/bin:$PATH"' >> "$BASHRC"
 
 # Add GKS Server pub RSA-key
-sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
+sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspfmba.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
 # Add tmux config with mouse enabled
-sudo -Hu "$MAINUSER" bash -c 'wget -q "ftp://bioftp.cspmz.ru/certs/keys/.tmux.conf" -O "$HOME/.tmux.conf"'
+sudo -Hu "$MAINUSER" bash -c 'wget -q "ftp://bioftp.cspfmba.ru/certs/keys/.tmux.conf" -O "$HOME/.tmux.conf"'
 
 # Final updates
 # apt-get update && apt-get -y dist-upgrade

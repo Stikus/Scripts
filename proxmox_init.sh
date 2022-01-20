@@ -8,12 +8,12 @@
 # export DEBIAN_FRONTEND="noninteractive"
 
 # Add GKS Server pub RSA-key
-mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspmz.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"
+mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspfmba.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"
 # Add tmux config with mouse enabled
-wget -q "ftp://bioftp.cspmz.ru/certs/keys/.tmux.conf" -O "$HOME/.tmux.conf"
+wget -q "ftp://bioftp.cspfmba.ru/certs/keys/.tmux.conf" -O "$HOME/.tmux.conf"
 
 # Add additional search and nameserver
-echo -e "search pak-cspmz.ru cspmz.ru\nnameserver 10.100.143.21\nnameserver 10.100.143.22" > /etc/resolv.conf
+echo -e "search pak-cspmz.ru cspfmba.ru\nnameserver 10.100.143.21\nnameserver 10.100.143.22" > /etc/resolv.conf
 
 # Fix licence warning
 # sed -i.bak "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js && systemctl restart pveproxy.service
@@ -53,7 +53,7 @@ lvextend --resizefs -l +100%FREE pve/root
 # echo "/dev/md0        /mnt/data    ext4    defaults    0 0" >> /etc/fstab
 # mount -a
 
-# Fusion inventory part: https://gitlab.cspmz.ru/volk/samba-AD-ansible/-/tree/master/roles/fusioninventory-agent
+# Fusion inventory part: https://gitlab.cspfmba.ru/volk/samba-AD-ansible/-/tree/master/roles/fusioninventory-agent
 apt-get update && apt-get --yes install \
     dmidecode \
     hwdata \
