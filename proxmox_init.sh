@@ -53,7 +53,7 @@ lvextend --resizefs -l +100%FREE pve/root
 # echo "/dev/md0        /mnt/data    ext4    defaults    0 0" >> /etc/fstab
 # mount -a
 
-# Fusion inventory part: https://gitlab.cspfmba.ru/volk/samba-AD-ansible/-/tree/master/roles/fusioninventory-agent
+# Fusion inventory part: https://gitlab.cspfmba.ru/volk/ansible/main-playbooks/-/tree/master/roles/fusioninventory-agent
 apt-get update && apt-get --yes install \
     dmidecode \
     hwdata \
@@ -75,9 +75,9 @@ apt-get update && apt-get --yes install \
     lsb-base \
     xz-utils
 
-wget -q http://debian.fusioninventory.org/downloads/fusioninventory-agent_2.5-3_all.deb && \
-dpkg -i fusioninventory-agent_2.5-3_all.deb && \
-rm fusioninventory-agent_2.5-3_all.deb && \
+wget -q https://github.com/fusioninventory/fusioninventory-agent/releases/download/2.6/fusioninventory-agent_2.6-1_all.deb && \
+dpkg -i fusioninventory-agent_2.6-1_all.deb && \
+rm fusioninventory-agent_2.6-1_all.deb && \
 sed -i 's|#server = http://server.domain.com/glpi/plugins/fusioninventory/|server = https://inv.pak-cspmz.ru/inv/plugins/fusioninventory|' /etc/fusioninventory/agent.cfg && \
 sed -i 's|no-ssl-check = 0|no-ssl-check = 1|' /etc/fusioninventory/agent.cfg && \
 sed -i 's|#logfile = /var/log/fusioninventory.log|logfile = /var/log/fusioninventory.log|' /etc/fusioninventory/agent.cfg && \
