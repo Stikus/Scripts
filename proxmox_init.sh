@@ -35,10 +35,14 @@ apt-get update && apt-get --yes dist-upgrade && apt-get --yes upgrade && apt-get
     htop \
     nfs-common \
     ntp \
+    zabbix-agent \
     tmux
 
 lvremove -y /dev/pve/data
 lvextend --resizefs -l +100%FREE pve/root
+
+sed -i '/^Server/s/127.0.0.1/10.100.143.184/' zabbix_agentd.conf
+systemctl restart zabbix-agent.service
 
 # # Mdadm part
 # apt-get install -y mdadm
@@ -72,6 +76,8 @@ apt-get update && apt-get --yes install \
     libjson-pp-perl \
     libsocket-getaddrinfo-perl \
     libtext-template-perl \
+    libyaml-tiny-perl \
+    libxml-xpath-perl \
     lsb-base \
     xz-utils
 
