@@ -21,7 +21,7 @@ sed -i.bak -z "s/res === null || res === undefined || \!res || res\n\t\t\t.data.
 
 # Fix updates
 sed -i -E 's|^(.*)$|#\1|' /etc/apt/sources.list.d/pve-enterprise.list
-sed -i '5i deb http://download.proxmox.com/debian/pve buster pve-no-subscription' /etc/apt/sources.list
+sed -i '5i deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription' /etc/apt/sources.list
 
 # Locales
 sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
