@@ -111,12 +111,12 @@ echo 'export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"' >> "$BASHRC"
 # cwltool
 pip3 install 'cwltool==3.1.20221018083734'
 
-# shellcheck 0.8.0
-wget -q "https://github.com/koalaman/shellcheck/releases/download/v0.8.0/shellcheck-v0.8.0.linux.x86_64.tar.xz" -O "shellcheck-v0.8.0.linux.x86_64.tar.xz" \
-    && tar -xJf "shellcheck-v0.8.0.linux.x86_64.tar.xz" \
-    && mv shellcheck-v0.8.0/shellcheck /usr/local/bin \
-    && rm "shellcheck-v0.8.0.linux.x86_64.tar.xz" \
-    && rm -r shellcheck-v0.8.0/
+# Shellcheck 0.9.0
+wget -q "https://github.com/koalaman/shellcheck/releases/download/v0.9.0/shellcheck-v0.9.0.linux.x86_64.tar.xz" -O "shellcheck-v0.9.0.linux.x86_64.tar.xz" \
+    && tar -xJf "shellcheck-v0.9.0.linux.x86_64.tar.xz" \
+    && mv shellcheck-v0.9.0/shellcheck /usr/local/bin \
+    && rm "shellcheck-v0.9.0.linux.x86_64.tar.xz" \
+    && rm -r shellcheck-v0.9.0/
 
 # memUsage #6c2474a [v0.2.0 02.09.2019]
 # psutil >= 2.2.1 (Tested with 5.6.1 - ok; 1.2.1 - err) - additional python package required for memUsage.
