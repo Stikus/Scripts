@@ -138,7 +138,7 @@ export PATH="$SOFT/cmake-3.24.2-linux-x86_64/bin:$PATH"
 echo 'export PATH="$SOFT/cmake-3.24.2-linux-x86_64/bin:$PATH"' >> "$BASHRC"
 
 # Add GKS Server pub RSA-key
-sudo -Hu "$MAINUSER" bash -c 'mkdir -p "$HOME/.ssh" && wget -q "ftp://bioftp.cspfmba.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys"'
+sudo -Hu "$MAINUSER" bash -c 'mkdir -p -m 700 "$HOME/.ssh" && wget -q "ftp://bioftp.cspfmba.ru/certs/keys/GKS_Server_id_rsa.pub" -O ->> "$HOME/.ssh/authorized_keys" && chmod 600 "$HOME/.ssh/authorized_keys"'
 # Add tmux config with mouse enabled
 sudo -Hu "$MAINUSER" bash -c 'wget -q "ftp://bioftp.cspfmba.ru/certs/keys/.tmux.conf" -O "$HOME/.tmux.conf"'
 
